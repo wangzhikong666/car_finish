@@ -1,0 +1,20 @@
+<launch>
+    <!-- ================= 系统总启动文件 ================= -->
+    <!-- 1. 核心视觉感知节点 (YOLO 推理) -->
+    <node pkg="car_finish" type="inference.py" name="yolo_inference_node" output="screen" />
+
+    <!-- 2. 底盘导航与目标追踪节点 -->
+    <node pkg="car_finish" type="massage_nav.py" name="massage_nav_node" output="screen" />
+
+    <!-- 3. 机械臂核心动作与防误触调度节点 -->
+    <node pkg="car_finish" type="my_massage_core.py" name="massage_core_node" output="screen" />
+
+    <!-- 4. 物联网云边协同节点 (负责接收手机跨网启停指令) -->
+    <node pkg="car_finish" type="iot_mqtt_bridge.py" name="iot_bridge_node" output="screen" />
+
+    <!-- 5. 压力传感器力控节点 (数据桩运行中，输出安全力控反馈) -->
+    <node pkg="car_finish" type="fsr402_driver.py" name="pressure_sensor_node" output="screen" />
+
+    <!-- 6. 超声波高精度防撞节点 (数据桩运行中，监控前方盲区) -->
+    <node pkg="car_finish" type="ultrasonic_driver.py" name="ultrasonic_sensor_node" output="screen" />
+</launch>
